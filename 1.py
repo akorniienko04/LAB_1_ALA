@@ -154,9 +154,9 @@ def read_off(filename: str):
 
 vertices, faces = read_off("/Users/artemkorniienko/R_for_DATA/archive/ModelNet40/laptop/test/laptop_0150.off")
 
-print(vertices.shape)
-print(faces [: 3])
-print(vertices)
+# print(vertices.shape)
+# print(faces [: 3])
+# print(vertices)
 
 
 
@@ -254,6 +254,43 @@ def rotate_xz(fig, kyt):
 # rotated_xz = rotate_xz(vertices, np.pi / 4)
 #
 # plot_off(rotated_xz, faces)
+
+
+
+#PART 2 TASK 4
+
+r_xy = np.array([
+        [np.cos(np.pi / 6), -np.sin(np.pi / 6), 0],
+        [np.sin(np.pi / 6),  np.cos(np.pi / 6), 0],
+        [0,            0,           1]
+    ])
+r_yz = np.array([
+        [1, 0,                      0],
+        [0, np.cos(np.pi / 4), -np.sin(np.pi / 4)],
+        [0, np.sin(np.pi / 4),  np.cos(np.pi / 4)]
+    ])
+
+r_xz = np.array([
+        [np.cos(np.pi / 3), 0, np.sin(np.pi / 3)],
+        [0,           1,           0],
+        [-np.sin(np.pi / 3),0, np.cos(np.pi / 3)]
+    ])
+
+final_matrix = r_xy @ r_yz @ r_xz
+
+print(f"Matrixa peretvorenna:\n{final_matrix}")
+
+
+
+
+rotated_xy = rotate_xy(vertices, np.pi / 6)
+plot_off(rotated_xy, faces)
+
+rotated_yz = rotate_yz(rotated_xy, np.pi / 4)
+plot_off(rotated_yz, faces)
+
+rotated_xz = rotate_xz(rotated_yz, np.pi / 3)
+plot_off(rotated_xz, faces)
 
 
 
