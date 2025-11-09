@@ -158,6 +158,12 @@ print(vertices.shape)
 print(faces [: 3])
 print(vertices)
 
+
+
+
+
+
+
 # Функція для візуалізації OFF-моделі у вигляді сітки та точок
 # (зручно бачити, як змінюється модель після трансформацій)
 def plot_off(vertices, faces):
@@ -184,13 +190,7 @@ def plot_off(vertices, faces):
 
 
 # Виклик функції для побудови OFF-моделі
-plot_off(vertices, faces)
-
-
-
-
-
-
+# plot_off(vertices, faces)
 
 
 
@@ -199,14 +199,63 @@ plot_off(vertices, faces)
 
 
 def rotate_xy(fig, kyt):
-    return 0
+
+    vertices_copy = fig.copy()
+
+    matrix_peretvoren = np.array([
+        [np.cos(kyt), -np.sin(kyt), 0],
+        [np.sin(kyt),  np.cos(kyt), 0],
+        [0,            0,           1]
+    ])
+
+    vertices_copy = vertices_copy @ matrix_peretvoren
+
+    return vertices_copy
+
+
+# rotated_xy = rotate_xy(vertices, np.pi / 4)
+#
+# plot_off(rotated_xy, faces)
 
 
 def rotate_yz(fig, kyt):
-    return 0
+    vertices_copy = fig.copy()
+
+    matrix_peretvoren = np.array([
+        [1, 0,                      0],
+        [0, np.cos(kyt), -np.sin(kyt)],
+        [0, np.sin(kyt),  np.cos(kyt)]
+    ])
+
+    vertices_copy = vertices_copy @ matrix_peretvoren
+
+    return vertices_copy
+
+# rotated_yz = rotate_yz(vertices, np.pi / 4)
+#
+# plot_off(rotated_yz, faces)
+
+
+
 
 def rotate_xz(fig, kyt):
-    return 0
+    vertices_copy = fig.copy()
+
+    matrix_peretvoren = np.array([
+        [np.cos(kyt), 0, np.sin(kyt)],
+        [0,           1,           0],
+        [-np.sin(kyt),0, np.cos(kyt)]
+    ])
+
+    vertices_copy = vertices_copy @ matrix_peretvoren
+
+    return vertices_copy
+
+# rotated_xz = rotate_xz(vertices, np.pi / 4)
+#
+# plot_off(rotated_xz, faces)
+
+
 
 
 
